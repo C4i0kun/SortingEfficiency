@@ -5,19 +5,19 @@ import java.util.Random;
 public class Main {
 
 	public static void main(String[] args) {
-		Number[] arr = new Number[10000];
-		Random rand = new Random();
+		Number[] arr = new Number[10];
 		
 		for (int i = 0; i < arr.length; i++ ) {
-			arr[i] = rand.nextInt(10000);
+			Random rand = new Random();
+			arr[i] = (Number) rand.nextInt(10);
 		}
 		
-		BubbleSort bubble = new BubbleSort();
+		HeapSort heap = new HeapSort();
 		NumberComparator c = new NumberComparator();
 		
-		bubble.sort(arr, c);
+		heap.sort(arr, c);
 		for (int i = 0; i < arr.length; i++) {
-			System.out.print(arr[i] + " ");
+			System.out.println(arr[i]);
 		}
 	}
 

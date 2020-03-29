@@ -17,7 +17,15 @@ class NumberComparator implements Comparator<Number> {
     	return compare(a,b) == 1;
     }
 
-    public boolean SmallerThan(Number a, Number b) {
+    public boolean smallerThan(Number a, Number b) {
     	return compare(a,b) == -1;
+    }
+    
+    public boolean biggerOrEqualThan(Number a, Number b) {
+    	return compare(a,b) == 1 || compare(a,b) == 0;
+    }
+    
+    public boolean smallerOrEqualThan(Number a, Number b) {
+    	return compare(a,b) == -1 || compare(a,b) == 0;
     }
 }
