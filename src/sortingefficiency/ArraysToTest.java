@@ -3,28 +3,32 @@ package sortingefficiency;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Arrays {
-	public static final int NUMBER_OF_ARRAY_TYPES = 3;
-	public static final int NUMBER_OF_SORT_MODES = 3;
-	public static final int MAX_ARRAY_SIZE = 1000000;
+public class ArraysToTest {
+	private int numberOfArrayTypes;
+	private int numberOfSortModes;
+	private int maxArraySize;
 	
-	public ArrayList<Number[][][]> listOfArrays;
+	private ArrayList<Number[][][]> listOfArrays;
 
-	public Arrays() {
+	public ArraysToTest(int numberOfArrayTypes, int numberOfSortModes, int maxArraySize) {
+		this.numberOfArrayTypes = numberOfArrayTypes;
+		this.numberOfSortModes = numberOfSortModes;
+		this.maxArraySize = maxArraySize;
+		
 		this.listOfArrays = new ArrayList<>();
 		
-		for (int i = 10; i <= MAX_ARRAY_SIZE; i *= 10) {
-			Number[][][] arr = new Number[NUMBER_OF_ARRAY_TYPES][NUMBER_OF_SORT_MODES][i];
+		for (int i = 10; i <= maxArraySize; i *= 10) {
+			Number[][][] arr = new Number[numberOfArrayTypes][numberOfSortModes][i];
 			createArray(arr, i);
 			listOfArrays.add(arr);
 		}
-		
+		System.out.println("Arrays generated!");
 	}
 	
 	private void createArray(Number[][][] arr, int arraySize) {
 		int arrayType = 0;
 		
-		while (arrayType < NUMBER_OF_ARRAY_TYPES) {
+		while (arrayType < numberOfArrayTypes) {
 			if (arrayType == 0) {
 				generateArrayValues(arr, arrayType, arraySize);
 			} else if (arrayType == 1) {
@@ -65,12 +69,28 @@ public class Arrays {
 			//Inverted Array
 			arr[arrayType][1][i] = number[1];
 			//Easy Array
-			if (rand.nextInt(10)==0) {
+			if (rand.nextInt(10) == 0) {
 				arr[arrayType][2][i] = number[0];
 			} else {
 				arr[arrayType][2][i] = number[2];
 			}
 		}
 	}
-	
+
+	/* Getters */
+	public int getMaxArraySize() {
+		return maxArraySize;
+	}
+
+	public int getNumberOfSortModes() {
+		return numberOfSortModes;
+	}
+
+	public int getNumberOfArrayTypes() {
+		return numberOfArrayTypes;
+	}
+
+	public ArrayList<Number[][][]> getListOfArrays() {
+		return listOfArrays;
+	}
 }

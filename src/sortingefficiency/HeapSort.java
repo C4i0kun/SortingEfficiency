@@ -1,5 +1,7 @@
 package sortingefficiency;
 
+import java.math.BigDecimal;
+
 /* This HeapSort algorithm was taken from
  * https://www.geeksforgeeks.org/java-program-for-heap-sort/
 */
@@ -8,6 +10,8 @@ public class HeapSort extends Sort {
 
 	@Override
 	public void sort(Number[] arr, NumberComparator c) {
+		long startTime = System.currentTimeMillis();
+		
 		int n = arr.length; 
 		
 		// Build heap (rearrange array)
@@ -24,6 +28,10 @@ public class HeapSort extends Sort {
 
 			heapify(arr, c, i, 0); 
         }
+
+		long totalTimeMs = System.currentTimeMillis() - startTime;
+		BigDecimal totalTimeSec = (new BigDecimal(totalTimeMs)).divide(new BigDecimal(1000));
+		System.out.println("---------HeapSort time (in seconds): " + totalTimeSec + " " + EfficiencyTest.arrayOrdered(arr, c));
 	}
 	
 	void heapify(Number arr[], NumberComparator c, int n, int i) { 

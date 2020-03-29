@@ -1,5 +1,7 @@
 package sortingefficiency;
 
+import java.math.BigDecimal;
+
 /* This InsertionSort algorithm was taken from
  * https://www.geeksforgeeks.org/insertion-sort/
 */
@@ -8,6 +10,8 @@ public class InsertionSort extends Sort {
 
 	@Override
 	public void sort(Number[] arr, NumberComparator c) {
+		long startTime = System.currentTimeMillis();
+	
     	int n = arr.length; 
     	
     	for (int i = 1; i < n; ++i) { 
@@ -23,6 +27,10 @@ public class InsertionSort extends Sort {
             } 
     		arr[j + 1] = key; 
         } 
+    	
+    	long totalTimeMs = System.currentTimeMillis() - startTime;
+		BigDecimal totalTimeSec = (new BigDecimal(totalTimeMs)).divide(new BigDecimal(1000));
+		System.out.println("---------InsertionSort time (in seconds): " + totalTimeSec + " " + EfficiencyTest.arrayOrdered(arr, c));
 	}
 
 
