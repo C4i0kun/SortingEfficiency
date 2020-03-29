@@ -3,16 +3,17 @@ package sortingefficiency;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Tests {
+public class Arrays {
 	public static final int NUMBER_OF_ARRAY_TYPES = 3;
 	public static final int NUMBER_OF_SORT_MODES = 3;
+	public static final int MAX_ARRAY_SIZE = 1000000;
 	
 	public ArrayList<Number[][][]> listOfArrays;
 
-	public Tests() {
+	public Arrays() {
 		this.listOfArrays = new ArrayList<>();
 		
-		for (int i = 10; i <= 1000; i *= 10) {
+		for (int i = 10; i <= MAX_ARRAY_SIZE; i *= 10) {
 			Number[][][] arr = new Number[NUMBER_OF_ARRAY_TYPES][NUMBER_OF_SORT_MODES][i];
 			createArray(arr, i);
 			listOfArrays.add(arr);
@@ -41,53 +42,33 @@ public class Tests {
 		NumberComparator c = new NumberComparator();
 		
 		for (int i = 0; i < arraySize; i++) {
-			Number number;
+			Number[] number = new Number[3];
 			
 			if (arrayType == 0) {
-				number = (Number) rand.nextInt(arraySize);
+				number[0] = (Number) rand.nextInt(arraySize);
+				number[1] = (Number) (arraySize - (i + 1));
+				number[2] = (Number) i;
 			} else if (arrayType == 1) {
-				number = (Number) (arraySize * rand.nextFloat());
+				number[0] = (Number) (arraySize * rand.nextFloat());
+				number[1] = (Number) ((arraySize - (i + 1)) + rand.nextFloat());
+				number[2] = (Number) (i + rand.nextFloat());
+				
 			} else {
-				number = (Number) (arraySize * rand.nextDouble());
+				number[0] = (Number) (arraySize * rand.nextDouble());
+				number[1] = (Number) ((arraySize - (i + 1)) + rand.nextDouble());
+				number[2] = (Number) (i + rand.nextDouble());
 			}
 			
 			//Random Array
-			arr[arrayType][0][i] = number;
+			arr[arrayType][0][i] = number[0];
 			
 			//Inverted Array
-			if (i == 0) {
-				arr[arrayType][1][i] = number;	
-			} else {
-				for (int j = i; j > 0; j--) {
-					if(c.biggerThan(number, arr[arrayType][1][j-1]) ) {
-						arr[arrayType][1][j] = arr[arrayType][1][j-1];
-						
-						if (j == 1) {
-							arr[arrayType][1][j-1] = number;
-						}
-					} else {
-						arr[arrayType][1][j] = number;
-						break;
-					}
-				}
-			}
-			
+			arr[arrayType][1][i] = number[1];
 			//Easy Array
-			if (i == 0) {
-				arr[arrayType][2][i] = number;	
+			if (rand.nextInt(10)==0) {
+				arr[arrayType][2][i] = number[0];
 			} else {
-				for (int j = i; j > 0; j--) {
-					if(c.smallerThan(number, arr[arrayType][2][j-1]) ) {
-						arr[arrayType][2][j] = arr[arrayType][2][j-1];
-
-						if (j == 1) {
-							arr[arrayType][1][j-1] = number;
-						}
-					} else {
-						arr[arrayType][2][j] = number;
-						break;
-					}
-				}
+				arr[arrayType][2][i] = number[2];
 			}
 		}
 	}
