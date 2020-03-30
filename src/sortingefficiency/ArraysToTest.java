@@ -6,23 +6,27 @@ import java.util.Random;
 public class ArraysToTest {
 	private int numberOfArrayTypes;
 	private int numberOfSortModes;
+	private int minArraySize;
 	private int maxArraySize;
 	
 	private ArrayList<Number[][][]> listOfArrays;
 
-	public ArraysToTest(int numberOfArrayTypes, int numberOfSortModes, int maxArraySize) {
+	public ArraysToTest(int numberOfArrayTypes, int numberOfSortModes, int minArraySize, int maxArraySize) {
 		this.numberOfArrayTypes = numberOfArrayTypes;
 		this.numberOfSortModes = numberOfSortModes;
+		this.minArraySize = minArraySize;
 		this.maxArraySize = maxArraySize;
 		
 		this.listOfArrays = new ArrayList<>();
 		
-		for (int i = 10; i <= maxArraySize; i *= 10) {
+		for (int i = minArraySize; i <= maxArraySize; i *= 10) {
 			Number[][][] arr = new Number[numberOfArrayTypes][numberOfSortModes][i];
 			createArray(arr, i);
 			listOfArrays.add(arr);
 		}
+		
 		System.out.println("Arrays generated!");
+		System.out.println("");
 	}
 	
 	private void createArray(Number[][][] arr, int arraySize) {
@@ -43,7 +47,6 @@ public class ArraysToTest {
 	
 	private void generateArrayValues(Number[][][] arr, int arrayType, int arraySize) {
 		Random rand = new Random();
-		NumberComparator c = new NumberComparator();
 		
 		for (int i = 0; i < arraySize; i++) {
 			Number[] number = new Number[3];
@@ -68,6 +71,7 @@ public class ArraysToTest {
 			
 			//Inverted Array
 			arr[arrayType][1][i] = number[1];
+			
 			//Easy Array
 			if (rand.nextInt(10) == 0) {
 				arr[arrayType][2][i] = number[0];
@@ -85,6 +89,10 @@ public class ArraysToTest {
 	public int getNumberOfSortModes() {
 		return numberOfSortModes;
 	}
+
+	public int getMinArraySize() {
+		return minArraySize;
+	}	
 
 	public int getNumberOfArrayTypes() {
 		return numberOfArrayTypes;

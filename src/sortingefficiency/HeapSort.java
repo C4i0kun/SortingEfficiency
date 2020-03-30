@@ -10,7 +10,7 @@ public class HeapSort extends Sort {
 
 	@Override
 	public void sort(Number[] arr, NumberComparator c) {
-		long startTime = System.currentTimeMillis();
+		long startTime = System.nanoTime();
 		
 		int n = arr.length; 
 		
@@ -29,9 +29,9 @@ public class HeapSort extends Sort {
 			heapify(arr, c, i, 0); 
         }
 
-		long totalTimeMs = System.currentTimeMillis() - startTime;
-		BigDecimal totalTimeSec = (new BigDecimal(totalTimeMs)).divide(new BigDecimal(1000));
-		System.out.println("---------HeapSort time (in seconds): " + totalTimeSec + " " + EfficiencyTest.arrayOrdered(arr, c));
+		long totalTimeNs = System.nanoTime() - startTime;
+		BigDecimal totalTimeSec = (new BigDecimal(totalTimeNs)).divide(new BigDecimal(1000000000));
+		System.out.println("---------|HeapSort time (in seconds): " + totalTimeSec + " >> Check Sorting: " + EfficiencyTest.arrayOrdered(arr, c));
 	}
 	
 	void heapify(Number arr[], NumberComparator c, int n, int i) { 

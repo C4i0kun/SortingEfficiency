@@ -10,7 +10,7 @@ public class InsertionSort extends Sort {
 
 	@Override
 	public void sort(Number[] arr, NumberComparator c) {
-		long startTime = System.currentTimeMillis();
+		long startTime = System.nanoTime();
 	
     	int n = arr.length; 
     	
@@ -28,9 +28,9 @@ public class InsertionSort extends Sort {
     		arr[j + 1] = key; 
         } 
     	
-    	long totalTimeMs = System.currentTimeMillis() - startTime;
-		BigDecimal totalTimeSec = (new BigDecimal(totalTimeMs)).divide(new BigDecimal(1000));
-		System.out.println("---------InsertionSort time (in seconds): " + totalTimeSec + " " + EfficiencyTest.arrayOrdered(arr, c));
+    	long totalTimeNs = System.nanoTime() - startTime;
+		BigDecimal totalTimeSec = (new BigDecimal(totalTimeNs)).divide(new BigDecimal(1000000000));
+		System.out.println("---------|InsertionSort time (in seconds): " + totalTimeSec + " >> Check Sorting: " + EfficiencyTest.arrayOrdered(arr, c));
 	}
 
 

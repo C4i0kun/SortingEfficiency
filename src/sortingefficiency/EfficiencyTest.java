@@ -7,20 +7,24 @@ public class EfficiencyTest {
 	ArraysToTest arraysToTest;
 	ArrayList<Sort> sortingAlgorithms = new ArrayList<>();
 
-	public EfficiencyTest(int numberOfArrayTypes, int numberOfSortModes, int maxArraySize) {
-		arraysToTest = new ArraysToTest(numberOfArrayTypes, numberOfSortModes, maxArraySize);
+	public EfficiencyTest(int numberOfArrayTypes, int numberOfSortModes, int minArraySize, int maxArraySize, String mode) {
+		arraysToTest = new ArraysToTest(numberOfArrayTypes, numberOfSortModes, minArraySize, maxArraySize);
 		
-		Sort bubbleSort = new BubbleSort();
-		Sort insertionSort = new InsertionSort();
-		Sort heapSort = new HeapSort();
-		Sort mergeSort = new MergeSort();
-		
-		sortingAlgorithms.add(bubbleSort);
-		sortingAlgorithms.add(insertionSort);
-		sortingAlgorithms.add(heapSort);
-		sortingAlgorithms.add(mergeSort);
-		
-		run();
+		if (mode == "n2" || mode == "all") {
+			Sort bubbleSort = new BubbleSort();
+			Sort insertionSort = new InsertionSort();
+			
+			sortingAlgorithms.add(bubbleSort);
+			sortingAlgorithms.add(insertionSort);
+		}
+
+		if (mode == "nlogn" || mode == "all") {
+			Sort heapSort = new HeapSort();
+			Sort mergeSort = new MergeSort();
+			
+			sortingAlgorithms.add(heapSort);
+			sortingAlgorithms.add(mergeSort);
+		}
 	}
 	
 	private void printIndex() {
@@ -39,11 +43,11 @@ public class EfficiencyTest {
 		System.out.println("");
 	}
 	
-	private void run() {
+	public void run() {
 		NumberComparator c = new NumberComparator();
 		printIndex();
 		
-		int arraySize = 10;
+		int arraySize = arraysToTest.getMinArraySize();
 		
 		Iterator<Number[][][]> arrayIterator = arraysToTest.getListOfArrays().iterator();
 		while (arrayIterator.hasNext()) {
@@ -58,7 +62,9 @@ public class EfficiencyTest {
 					
 					Iterator<Sort> sortIterator = sortingAlgorithms.iterator();
 					while (sortIterator.hasNext()) {
-						sortIterator.next().sort(arrayToSort[i][j] ,c);
+						Number[] clonedArrayToSort = new Number[arrayToSort[i][j].length];
+						clonedArrayToSort = arrayToSort[i][j].clone();
+						sortIterator.next().sort(clonedArrayToSort ,c);
 					}
 				}
 			}

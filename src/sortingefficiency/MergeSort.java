@@ -10,13 +10,13 @@ public class MergeSort extends Sort {
 
 	@Override
 	public void sort(Number[] arr, NumberComparator c) {
-		long startTime = System.currentTimeMillis();
+		long startTime = System.nanoTime();
 		
 		mergesort(arr, c, 0, arr.length - 1);
 		
-		long totalTimeMs = System.currentTimeMillis() - startTime;
-		BigDecimal totalTimeSec = (new BigDecimal(totalTimeMs)).divide(new BigDecimal(1000));
-		System.out.println("---------MergeSort time (in seconds): " + totalTimeSec  + " " + EfficiencyTest.arrayOrdered(arr, c));
+		long totalTimeNs = System.nanoTime() - startTime;
+		BigDecimal totalTimeSec = (new BigDecimal(totalTimeNs)).divide(new BigDecimal(1000000000));
+		System.out.println("---------|MergeSort time (in seconds): " + totalTimeSec  + " >> Check Sorting: " + EfficiencyTest.arrayOrdered(arr, c));
 	}
 	
 	void merge(Number arr[], NumberComparator c, int l, int m, int r) { 

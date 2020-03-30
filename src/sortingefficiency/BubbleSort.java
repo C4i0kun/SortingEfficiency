@@ -10,7 +10,7 @@ public class BubbleSort extends Sort{
 
 	@Override
 	public void sort(Number[] arr, NumberComparator c) {
-		long startTime = System.currentTimeMillis();
+		long startTime = System.nanoTime();
 		
 		int n = arr.length;
 		Number temp = 0;
@@ -26,8 +26,8 @@ public class BubbleSort extends Sort{
 			}
 		}
 		
-		long totalTimeMs = System.currentTimeMillis() - startTime;
-		BigDecimal totalTimeSec = (new BigDecimal(totalTimeMs)).divide(new BigDecimal(1000));
-		System.out.println("---------BubbleSort time (in seconds): " + totalTimeSec + " " + EfficiencyTest.arrayOrdered(arr, c));
+		long totalTimeNs = System.nanoTime() - startTime;
+		BigDecimal totalTimeSec = (new BigDecimal(totalTimeNs)).divide(new BigDecimal(1000000000));
+		System.out.println("---------|BubbleSort time (in seconds): " + totalTimeSec + " >> Check Sorting: " + EfficiencyTest.arrayOrdered(arr, c));
 	}
 }
