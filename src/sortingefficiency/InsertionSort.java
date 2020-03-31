@@ -30,7 +30,7 @@ public class InsertionSort extends Sort {
     	
     	long totalTimeNs = System.nanoTime() - startTime;
 		BigDecimal totalTimeSec = (new BigDecimal(totalTimeNs)).divide(new BigDecimal(1000000000));
-		System.out.println("---------|InsertionSort time (in seconds): " + totalTimeSec + " >> Check Sorting: " + EfficiencyTest.arrayOrdered(arr, c));
+		System.out.println("---------|InsertionSort time (in seconds): " + totalTimeSec);
 	}
 
 

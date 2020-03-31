@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class EfficiencyTest {
-	private ArraysToTest arraysToTest;
+	private ArraysToSort arraysToTest;
 	private ArrayList<Sort> sortingAlgorithms = new ArrayList<>();
 	
 	private ArrayList<Number[][][][]> resultsOfTest = new ArrayList<>();
 
 	public EfficiencyTest(int numberOfArrayTypes, int numberOfSortModes, int minArraySize, int maxArraySize, String mode) {
-		arraysToTest = new ArraysToTest(numberOfArrayTypes, numberOfSortModes, minArraySize, maxArraySize);
+		arraysToTest = new ArraysToSort(numberOfArrayTypes, numberOfSortModes, minArraySize, maxArraySize);
 		
 		if (mode == "n2" || mode == "all") {
 			Sort bubbleSort = new BubbleSort();

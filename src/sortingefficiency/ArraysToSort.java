@@ -3,7 +3,7 @@ package sortingefficiency;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class ArraysToTest {
+public class ArraysToSort {
 	private int numberOfArrayTypes;
 	private int numberOfSortModes;
 	private int minArraySize;
@@ -11,7 +11,7 @@ public class ArraysToTest {
 	
 	private ArrayList<Number[][][]> listOfArrays;
 
-	public ArraysToTest(int numberOfArrayTypes, int numberOfSortModes, int minArraySize, int maxArraySize) {
+	public ArraysToSort(int numberOfArrayTypes, int numberOfSortModes, int minArraySize, int maxArraySize) {
 		this.numberOfArrayTypes = numberOfArrayTypes;
 		this.numberOfSortModes = numberOfSortModes;
 		this.minArraySize = minArraySize;

@@ -31,7 +31,7 @@ public class HeapSort extends Sort {
 
 		long totalTimeNs = System.nanoTime() - startTime;
 		BigDecimal totalTimeSec = (new BigDecimal(totalTimeNs)).divide(new BigDecimal(1000000000));
-		System.out.println("---------|HeapSort time (in seconds): " + totalTimeSec + " >> Check Sorting: " + EfficiencyTest.arrayOrdered(arr, c));
+		System.out.println("---------|HeapSort time (in seconds): " + totalTimeSec);
 	}
 	
 	void heapify(Number arr[], NumberComparator c, int n, int i) { 

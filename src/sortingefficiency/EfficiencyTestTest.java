@@ -33,6 +33,7 @@ class EfficiencyTestTest {
 				for (int j = 0; j < currentArray[i].length; j++) {
 					for (int k = 0; k < currentArray[i][j].length; k++) {
 						if (EfficiencyTest.arrayOrdered(currentArray[i][j][k], c) == false) {
+							System.out.println("Failed: Array [" + i + "][" + j + "][" + k + "] is unsorted!");
 							return false;
 						}
 					}
@@ -40,6 +41,7 @@ class EfficiencyTestTest {
 			}
 		}
 		
+		System.out.println("All arrays are sorted!");
 		return true;
 	}
 	

@@ -28,6 +28,6 @@ public class BubbleSort extends Sort{
 		
 		long totalTimeNs = System.nanoTime() - startTime;
 		BigDecimal totalTimeSec = (new BigDecimal(totalTimeNs)).divide(new BigDecimal(1000000000));
-		System.out.println("---------|BubbleSort time (in seconds): " + totalTimeSec + " >> Check Sorting: " + EfficiencyTest.arrayOrdered(arr, c));
+		System.out.println("---------|BubbleSort time (in seconds): " + totalTimeSec);
 	}
 }
