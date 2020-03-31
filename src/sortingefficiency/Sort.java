@@ -1,5 +1,7 @@
 package sortingefficiency;
 
+import java.math.BigDecimal;
+
 public abstract class Sort {
-	public abstract void sort(Number[] arr, NumberComparator c);
+	public abstract BigDecimal sort(Number[] arr, NumberComparator c);
 }

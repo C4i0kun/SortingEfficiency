@@ -2,8 +2,10 @@ package sortingefficiency;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.math.BigDecimal;
 import java.util.Iterator;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class EfficiencyTestTest {
@@ -14,35 +16,70 @@ class EfficiencyTestTest {
 	static Number[] arr5 = {2.0, 3.45, 9.443, 10.554, 15.989, 16.166, 24.998, 42.887, 42.889, 42.998};
 	static Number[] arr6 = {2.0, 3.45, 9.443, 10.554, 15.989, 16.166, 24.998, 42.998, 42.889, 42.998};
 	static NumberComparator c = new NumberComparator();
+	static EfficiencyTest test;;
 	
-	@Test
-	void testRun() {
-		EfficiencyTest test = new EfficiencyTest(3, 3, 1000, 1000, "all");
+	@BeforeAll
+	static void preparation() {
+		test = new EfficiencyTest(3, 3, 1000, 1000, "all");
 		test.run();
-		
+	}
+	
+	/* This function tests if, after a run, the arrays are sorted!*/
+	@Test
+	void testRunSorting() {
 		/* All result arrays must be sorted! */
-		assertEquals(true, testRunAux(test));
+		assertEquals(true, testRunAux(test, "Sorting"));
 		
 	}
 	
-	private boolean testRunAux(EfficiencyTest test) {
-		Iterator<Number[][][][]> resultsIterator = test.getResultsOfTest().iterator();		
-		while(resultsIterator.hasNext()) {
-			Number[][][][] currentArray = resultsIterator.next();
-			for (int i = 0; i < currentArray.length; i++) {
-				for (int j = 0; j < currentArray[i].length; j++) {
-					for (int k = 0; k < currentArray[i][j].length; k++) {
-						if (EfficiencyTest.arrayOrdered(currentArray[i][j][k], c) == false) {
-							System.out.println("Failed: Array [" + i + "][" + j + "][" + k + "] is unsorted!");
-							return false;
+	@Test
+	void testRunResults() {
+		/* All result arrays must be sorted! */
+		assertEquals(true, testRunAux(test, "Results"));
+		
+	}
+	
+	private boolean testRunAux(EfficiencyTest test, String mode) {
+		if (mode == "Sorting") {
+			Iterator<Number[][][][]> resultsIterator = test.getResultsOfTest().iterator();		
+			while(resultsIterator.hasNext()) {
+				Number[][][][] currentArray = resultsIterator.next();
+				for (int i = 0; i < currentArray.length; i++) {
+					for (int j = 0; j < currentArray[i].length; j++) {
+						for (int k = 0; k < currentArray[i][j].length; k++) {
+							if (EfficiencyTest.arrayOrdered(currentArray[i][j][k], c) == false) {
+								System.out.println("Failed: Array [" + i + "][" + j + "][" + k + "] is unsorted!");
+								return false;
+							}
 						}
 					}
 				}
 			}
+			
+			System.out.println("All arrays are sorted!");
+			return true;
+			
+		} else if (mode == "Results") {
+			Iterator<BigDecimal[][][]> resultsIterator = test.getTimeResults().iterator();		
+			while(resultsIterator.hasNext()) {
+				BigDecimal[][][] currentArray = resultsIterator.next();
+				for (int i = 0; i < currentArray.length; i++) {
+					for (int j = 0; j < currentArray[i].length; j++) {
+						for (int k = 0; k < currentArray[i][j].length; k++) {
+							if (currentArray[i][j][k] instanceof BigDecimal) {
+								System.out.println("Failed: element [" + i + "][" + j + "][" + k + "] is not a BigDecimal!");
+								return false;
+							}
+						}
+					}
+				}
+			}
+			
+			System.out.println("All results are BigDecimals!");
+			return true;
+		} else {
+			return true;
 		}
-		
-		System.out.println("All arrays are sorted!");
-		return true;
 	}
 	
 	@Test

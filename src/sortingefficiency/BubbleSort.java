@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 public class BubbleSort extends Sort{
 
 	@Override
-	public void sort(Number[] arr, NumberComparator c) {
+	public BigDecimal sort(Number[] arr, NumberComparator c) {
 		long startTime = System.nanoTime();
 		
 		int n = arr.length;
@@ -29,5 +29,6 @@ public class BubbleSort extends Sort{
 		long totalTimeNs = System.nanoTime() - startTime;
 		BigDecimal totalTimeSec = (new BigDecimal(totalTimeNs)).divide(new BigDecimal(1000000000));
 		System.out.println("---------|BubbleSort time (in seconds): " + totalTimeSec);
+		return totalTimeSec;
 	}
 }

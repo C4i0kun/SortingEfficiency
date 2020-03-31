@@ -1,5 +1,6 @@
 package sortingefficiency;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -7,7 +8,8 @@ public class EfficiencyTest {
 	private ArraysToSort arraysToTest;
 	private ArrayList<Sort> sortingAlgorithms = new ArrayList<>();
 	
-	private ArrayList<Number[][][][]> resultsOfTest = new ArrayList<>();
+	private ArrayList<Number[][][][]> arraysAfterTest = new ArrayList<>();
+	private ArrayList<BigDecimal[][][]> timeResults = new ArrayList<>();
 
 	public EfficiencyTest(int numberOfArrayTypes, int numberOfSortModes, int minArraySize, int maxArraySize, String mode) {
 		arraysToTest = new ArraysToSort(numberOfArrayTypes, numberOfSortModes, minArraySize, maxArraySize);
@@ -57,6 +59,8 @@ public class EfficiencyTest {
 			
 			/*Dimensions explained: Number[number of sort algorithms][number of array types][number of sort modes][size of array] */
 			Number[][][][] sortedArrays = new Number[sortingAlgorithms.size()][arraysToTest.getNumberOfArrayTypes()][arraysToTest.getNumberOfSortModes()][arraySize];
+			
+			BigDecimal[][][] timeResults = new BigDecimal[sortingAlgorithms.size()][arraysToTest.getNumberOfArrayTypes()][arraysToTest.getNumberOfSortModes()];
 					
 			System.out.println("Current Array Size: " + arraySize);
 			
@@ -72,7 +76,7 @@ public class EfficiencyTest {
 						Number[] clonedArrayToSort = new Number[arrayToSort[i][j].length];
 						clonedArrayToSort = arrayToSort[i][j].clone();
 						
-						sortIterator.next().sort(clonedArrayToSort ,c);
+						timeResults[iteratorIndex][i][j] = sortIterator.next().sort(clonedArrayToSort ,c);
 						
 						sortedArrays[iteratorIndex][i][j] = clonedArrayToSort;
 						iteratorIndex++;
@@ -80,7 +84,7 @@ public class EfficiencyTest {
 				}
 			}
 			
-			resultsOfTest.add(sortedArrays);
+			arraysAfterTest.add(sortedArrays);
 			arraySize *= 10;
 		}
 	}
@@ -96,6 +100,10 @@ public class EfficiencyTest {
 	
 	/* Getters */
 	public ArrayList<Number[][][][]> getResultsOfTest() {
-		return resultsOfTest;
+		return arraysAfterTest;
+	}
+
+	public ArrayList<BigDecimal[][][]> getTimeResults() {
+		return timeResults;
 	}
 }
