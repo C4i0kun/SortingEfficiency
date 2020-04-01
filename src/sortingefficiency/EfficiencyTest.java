@@ -1,18 +1,26 @@
 package sortingefficiency;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 public class EfficiencyTest {
+	private String mode;
+	
 	private ArraysToSort arraysToTest;
 	private ArrayList<Sort> sortingAlgorithms = new ArrayList<>();
 	
 	private ArrayList<Number[][][][]> arraysAfterTest = new ArrayList<>();
 	private ArrayList<BigDecimal[][][]> timeResults = new ArrayList<>();
+	
+	private CSVWriter csvWriter;
 
-	public EfficiencyTest(int numberOfArrayTypes, int numberOfSortModes, int minArraySize, int maxArraySize, String mode) {
-		arraysToTest = new ArraysToSort(numberOfArrayTypes, numberOfSortModes, minArraySize, maxArraySize);
+	public EfficiencyTest(int numberOfArrayTypes, int numberOfSortModes, int minArraySize, int maxArraySize, String mode) throws IOException {
+		this.mode = mode;
+		
+		this.csvWriter = new CSVWriter();
+		this.arraysToTest = new ArraysToSort(numberOfArrayTypes, numberOfSortModes, minArraySize, maxArraySize);
 		
 		if (mode == "n2" || mode == "all") {
 			Sort bubbleSort = new BubbleSort();
@@ -47,7 +55,7 @@ public class EfficiencyTest {
 		System.out.println("");
 	}
 	
-	public void run() {
+	public void run() throws IOException {
 		NumberComparator c = new NumberComparator();
 		printIndex();
 		
@@ -60,7 +68,8 @@ public class EfficiencyTest {
 			/*Dimensions explained: Number[number of sort algorithms][number of array types][number of sort modes][size of array] */
 			Number[][][][] sortedArrays = new Number[sortingAlgorithms.size()][arraysToTest.getNumberOfArrayTypes()][arraysToTest.getNumberOfSortModes()][arraySize];
 			
-			BigDecimal[][][] timeResults = new BigDecimal[sortingAlgorithms.size()][arraysToTest.getNumberOfArrayTypes()][arraysToTest.getNumberOfSortModes()];
+			/*Dimensions explained: Number[number of sort algorithms][number of array types][number of sort modes] */
+			BigDecimal[][][] timeResultsArray = new BigDecimal[sortingAlgorithms.size()][arraysToTest.getNumberOfArrayTypes()][arraysToTest.getNumberOfSortModes()];
 					
 			System.out.println("Current Array Size: " + arraySize);
 			
@@ -76,14 +85,19 @@ public class EfficiencyTest {
 						Number[] clonedArrayToSort = new Number[arrayToSort[i][j].length];
 						clonedArrayToSort = arrayToSort[i][j].clone();
 						
-						timeResults[iteratorIndex][i][j] = sortIterator.next().sort(clonedArrayToSort ,c);
+						timeResultsArray[iteratorIndex][i][j] = sortIterator.next().sort(clonedArrayToSort, c, csvWriter);
 						
 						sortedArrays[iteratorIndex][i][j] = clonedArrayToSort;
 						iteratorIndex++;
 					}
 				}
+				
+				csvWriter.writeAll("\n");
 			}
 			
+			csvWriter.writeAll("\n");
+			
+			timeResults.add(timeResultsArray);
 			arraysAfterTest.add(sortedArrays);
 			arraySize *= 10;
 		}
@@ -105,5 +119,9 @@ public class EfficiencyTest {
 
 	public ArrayList<BigDecimal[][][]> getTimeResults() {
 		return timeResults;
+	}
+
+	public String getMode() {
+		return mode;
 	}
 }

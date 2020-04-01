@@ -1,5 +1,6 @@
 package sortingefficiency;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 
 /* This MergeSort algorithm was taken from
@@ -9,7 +10,7 @@ import java.math.BigDecimal;
 public class MergeSort extends Sort {
 
 	@Override
-	public BigDecimal sort(Number[] arr, NumberComparator c) {
+	public BigDecimal sort(Number[] arr, NumberComparator c, CSVWriter csvWriter) throws IOException {
 		long startTime = System.nanoTime();
 		
 		mergesort(arr, c, 0, arr.length - 1);
@@ -17,6 +18,7 @@ public class MergeSort extends Sort {
 		long totalTimeNs = System.nanoTime() - startTime;
 		BigDecimal totalTimeSec = (new BigDecimal(totalTimeNs)).divide(new BigDecimal(1000000000));
 		System.out.println("---------|MergeSort time (in seconds): " + totalTimeSec);
+		csvWriter.write(totalTimeSec.toString() + ",","MergeFile");
 		return totalTimeSec;
 	}
 	

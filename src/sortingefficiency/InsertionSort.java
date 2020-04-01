@@ -1,5 +1,6 @@
 package sortingefficiency;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 
 /* This InsertionSort algorithm was taken from
@@ -9,7 +10,7 @@ import java.math.BigDecimal;
 public class InsertionSort extends Sort {
 
 	@Override
-	public BigDecimal sort(Number[] arr, NumberComparator c) {
+	public BigDecimal sort(Number[] arr, NumberComparator c, CSVWriter csvWriter) throws IOException {
 		long startTime = System.nanoTime();
 	
     	int n = arr.length; 
@@ -31,6 +32,7 @@ public class InsertionSort extends Sort {
     	long totalTimeNs = System.nanoTime() - startTime;
 		BigDecimal totalTimeSec = (new BigDecimal(totalTimeNs)).divide(new BigDecimal(1000000000));
 		System.out.println("---------|InsertionSort time (in seconds): " + totalTimeSec);
+		csvWriter.write(totalTimeSec.toString() + ",","InsertionFile");
 		return totalTimeSec;
 	}
 

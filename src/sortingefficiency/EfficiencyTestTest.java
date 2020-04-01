@@ -2,6 +2,7 @@ package sortingefficiency;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Iterator;
 
@@ -19,7 +20,7 @@ class EfficiencyTestTest {
 	static EfficiencyTest test;;
 	
 	@BeforeAll
-	static void preparation() {
+	static void preparation() throws IOException {
 		test = new EfficiencyTest(3, 3, 1000, 1000, "all");
 		test.run();
 	}
@@ -66,7 +67,7 @@ class EfficiencyTestTest {
 				for (int i = 0; i < currentArray.length; i++) {
 					for (int j = 0; j < currentArray[i].length; j++) {
 						for (int k = 0; k < currentArray[i][j].length; k++) {
-							if (currentArray[i][j][k] instanceof BigDecimal) {
+							if (!(currentArray[i][j][k] instanceof BigDecimal)) {
 								System.out.println("Failed: element [" + i + "][" + j + "][" + k + "] is not a BigDecimal!");
 								return false;
 							}

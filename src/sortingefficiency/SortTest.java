@@ -2,6 +2,7 @@ package sortingefficiency;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.IOException;
 import java.util.Random;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -18,9 +19,12 @@ class SortTest {
 	static MergeSort mergeSort = new MergeSort();
 	
 	static NumberComparator c = new NumberComparator();
+	static CSVWriter csvWriter;
 	
 	@BeforeEach
-	void preparation() {
+	void preparation() throws IOException {
+		csvWriter = new CSVWriter();
+		
 		Random rand = new Random();
 		
 		for (int i = 0; i < 10000; i++) {
@@ -31,74 +35,74 @@ class SortTest {
 	}
 
 	@Test
-	void testBubbleSortInt() {
-		bubbleSort.sort(arr1, c);
+	void testBubbleSortInt() throws IOException {
+		bubbleSort.sort(arr1, c, csvWriter);
 		assertEquals(true, EfficiencyTest.arrayOrdered(arr1, c));
 	}
 	
 	@Test
-	void testBubbleSortFloat() {
-		bubbleSort.sort(arr2, c);
+	void testBubbleSortFloat() throws IOException {
+		bubbleSort.sort(arr2, c, csvWriter);
 		assertEquals(true, EfficiencyTest.arrayOrdered(arr2, c));
 	}
 
 	@Test
-	void testBubbleSortDouble() {
-		bubbleSort.sort(arr3, c);
+	void testBubbleSortDouble() throws IOException {
+		bubbleSort.sort(arr3, c, csvWriter);
 		assertEquals(true, EfficiencyTest.arrayOrdered(arr3, c));
 	}
 
 	@Test
-	void testInsertionSortInt() {
-		insertionSort.sort(arr1, c);
+	void testInsertionSortInt() throws IOException {
+		insertionSort.sort(arr1, c, csvWriter);
 		assertEquals(true, EfficiencyTest.arrayOrdered(arr1, c));
 	}
 	
 	@Test
-	void testInsertionSortFloat() {
-		insertionSort.sort(arr2, c);
+	void testInsertionSortFloat() throws IOException {
+		insertionSort.sort(arr2, c, csvWriter);
 		assertEquals(true, EfficiencyTest.arrayOrdered(arr2, c));
 	}
 	
 	@Test
-	void testInsertionSortDouble() {
-		insertionSort.sort(arr3, c);
+	void testInsertionSortDouble() throws IOException {
+		insertionSort.sort(arr3, c, csvWriter);
 		assertEquals(true, EfficiencyTest.arrayOrdered(arr3, c));
 	}
 
 	@Test
-	void testHeapSortInt() {
-		heapSort.sort(arr1, c);
+	void testHeapSortInt() throws IOException {
+		heapSort.sort(arr1, c, csvWriter);
 		assertEquals(true, EfficiencyTest.arrayOrdered(arr1, c));
 	}
 
 	@Test
-	void testHeapSortFloat() {
-		heapSort.sort(arr2, c);
+	void testHeapSortFloat() throws IOException {
+		heapSort.sort(arr2, c, csvWriter);
 		assertEquals(true, EfficiencyTest.arrayOrdered(arr2, c));
 	}
 	
 	@Test
-	void testHeapSortDouble() {
-		heapSort.sort(arr3, c);
+	void testHeapSortDouble() throws IOException {
+		heapSort.sort(arr3, c, csvWriter);
 		assertEquals(true, EfficiencyTest.arrayOrdered(arr3, c));
 	}
 	
 	@Test
-	void testeMergeSortInt() {
-		mergeSort.sort(arr1, c);		
+	void testeMergeSortInt() throws IOException {
+		mergeSort.sort(arr1, c, csvWriter);		
 		assertEquals(true, EfficiencyTest.arrayOrdered(arr1, c));
 	}
 
 	@Test
-	void testeMergeSortFloat() {
-		mergeSort.sort(arr2, c);
+	void testeMergeSortFloat() throws IOException {
+		mergeSort.sort(arr2, c, csvWriter);
 		assertEquals(true, EfficiencyTest.arrayOrdered(arr2, c));
 	}
 	
 	@Test
-	void testeMergeSortDouble() {
-		mergeSort.sort(arr3, c);
+	void testeMergeSortDouble() throws IOException {
+		mergeSort.sort(arr3, c, csvWriter);
 		assertEquals(true, EfficiencyTest.arrayOrdered(arr3, c));
 	}
 
