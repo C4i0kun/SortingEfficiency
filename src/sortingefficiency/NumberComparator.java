@@ -3,6 +3,7 @@ package sortingefficiency;
 import java.math.BigDecimal;
 import java.util.Comparator;
 
+/* This comparators was created to let us compare instances of Numbers */
 class NumberComparator implements Comparator<Number> {
 
     public int compare(Number a, Number b){

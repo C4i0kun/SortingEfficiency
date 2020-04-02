@@ -9,6 +9,7 @@ public class ArraysToSort {
 	private int minArraySize;
 	private int maxArraySize;
 	
+	/*Dimensions explained: Number[number of array types][number of sort modes][size of array] */
 	private ArrayList<Number[][][]> listOfArrays;
 
 	public ArraysToSort(int numberOfArrayTypes, int numberOfSortModes, int minArraySize, int maxArraySize) {
@@ -29,6 +30,7 @@ public class ArraysToSort {
 		System.out.println("");
 	}
 	
+	/*  Create the multidimensional array with all arrays that will be sorted */
 	private void createArray(Number[][][] arr, int arraySize) {
 		int arrayType = 0;
 		
@@ -45,6 +47,7 @@ public class ArraysToSort {
 		}
 	}
 	
+	/* Automatically generate values to the unsorted arrays considering the sortMode */
 	private void generateArrayValues(Number[][][] arr, int arrayType, int arraySize) {
 		Random rand = new Random();
 		
@@ -72,7 +75,7 @@ public class ArraysToSort {
 			//Inverted Array
 			arr[arrayType][1][i] = number[1];
 			
-			//Easy Array
+			//Easy Array (Almost sorted)
 			if (rand.nextInt(10) == 0) {
 				arr[arrayType][2][i] = number[0];
 			} else {

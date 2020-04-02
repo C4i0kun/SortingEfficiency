@@ -39,6 +39,7 @@ public class EfficiencyTest {
 		}
 	}
 	
+	/* Print index for better readability on terminal */
 	private void printIndex() {
 		System.out.println("ARRAY TYPES INDEX:");
 		System.out.println("1 - Array of integers");
@@ -55,6 +56,7 @@ public class EfficiencyTest {
 		System.out.println("");
 	}
 	
+	/* Run the sorting alrogithms on every array in arrayForTest*/
 	public void run() throws IOException {
 		NumberComparator c = new NumberComparator();
 		printIndex();
@@ -103,6 +105,7 @@ public class EfficiencyTest {
 		}
 	}
 	
+	/* Check if an Array is ordered */
 	public static boolean arrayOrdered(Number[] arr, NumberComparator c) {
 		for (int i = 1; i < arr.length; i++) {
 			if (c.smallerThan(arr[i], arr[i - 1])) {
